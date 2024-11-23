@@ -1,8 +1,14 @@
-import { registerRootComponent } from 'expo';
-
+import { AppRegistry } from 'react-native';
+import { name as appName } from './app.json';
 import App from './App';
+import { SalesforceSDKManager } from 'react-native-salesforce-sdk';
 
-// registerRootComponent calls AppRegistry.registerComponent('main', () => App);
-// It also ensures that whether you load the app in Expo Go or in a native build,
-// the environment is set up appropriately
-registerRootComponent(App);
+// Initialize Salesforce SDK
+SalesforceSDKManager.initNative({
+    oauthRedirectURI: 'sfdc://success',
+    remoteAccessConsumerKey: 'YourConsumerKey',
+    oauthScopes: ['api', 'refresh_token'],
+});
+
+// Register the main application component
+AppRegistry.registerComponent(appName, () => App);
